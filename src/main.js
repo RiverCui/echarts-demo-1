@@ -2,6 +2,9 @@ import echarts from 'echarts'
 const main = document.getElementById('main')
 const loadMoreButton = document.getElementById('loadMore')
 
+const width = document.documentElement.clientWidth
+main.style.width = `${width}px`
+main.style.height = `${width *1.2}px`
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(main,'default');
 let n = 0
@@ -18,34 +21,47 @@ let xData = [createKey(),createKey(),createKey(),createKey(),createKey(),createK
 let values = [createValue(),createValue(),createValue(),createValue(),createValue(),createValue()]
 // 使用刚指定的配置项和数据显示图表。
 myChart.setOption({
-    title: {
-      show: true,
-      text: '吃苹果'
-    },
-    legend: {
-        data: ['个数']
-    },
-    tooltip: {
-        show: true
-    },
-    xAxis: {
-        type: 'category',
-        data: xData
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [{
-        lineStyle:{
-            color: 'pink'
+    baseOption: {
+        title: {
+            show: true,
+            text: '吃苹果'
         },
-        itemStyle: {
-            borderWidth: 10
+        legend: {
+            data: ['个数']
         },
-        name: '个数',
-        data: values,
-        type: 'line'
-    }]
+        tooltip: {
+            show: true
+        },
+        xAxis: {
+            type: 'category',
+            data: xData
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            lineStyle:{
+                color: 'pink'
+            },
+            name: '个数',
+            data: values,
+            type: 'line'
+        }]
+    },
+    media: [
+        {
+            query: {
+                maxWidth: 500
+            },
+            option: {
+                series: [{
+                    itemStyle: {
+                        borderWidth: 30
+                    }
+                }]
+            }
+        }
+    ]
 });
 
 let isLoading = false
