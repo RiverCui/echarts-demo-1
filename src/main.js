@@ -4,8 +4,8 @@ const loadMoreButton = document.getElementById('loadMore')
 
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(main,'default');
-let n = 1
-let m = 1
+let n = 0
+let m = 0
 function createKey(){
     n+=1
     return `2021-8-${n}`
@@ -68,4 +68,10 @@ loadMoreButton.addEventListener('click', ()=>{
         myChart.hideLoading()
         isLoading = false
     },3000)
+})
+
+myChart.on('click', (e) => {
+    console.log(e.name);
+    console.log(e.dataIndex);
+    console.log(e.data);
 })
